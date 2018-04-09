@@ -19,7 +19,7 @@ char *student[30] = {"student/out/canny_baboon.png" ,"student/out/canny_balloons
 int main(int argc, char*argv[]) {
 	bool valid = true;
 	for (int i = 0; i < 30; i++) {
-		valid = is_correct(refs[i], naive[i], student[i]);
+		valid = is_correct(refs[i], naive[i], student[i]) && valid;
 	}
 	if (!valid) {
 		printf("Correctness Check Failed.\n");
@@ -104,10 +104,10 @@ bool is_correct (char *ref, char *naive, char *student) {
 	fclose(ref_file);
 	fclose(naive_file);
 	fclose(student_file);
-
 	if (student_total <= (naive_total * 105) / 100) {
 		return true;
 	}
+	fprintf(stderr, "Failed: %s\n", ref);
 	return false;
 }
 
