@@ -1,10 +1,23 @@
 #!/bin/bash
-# by Paul Colby (http://colby.id.au), no rights reserved ;)
+# by Stephan Kaminsky
 
 PREV_TOTAL=0
 PREV_IDLE=0
-echo "Here is the current cpu usage (Press ctrl+c to exit):";
-while true; do
+notime="false"
+if [ ! -z $1 ]; then
+	re='^[0-9]+$'
+	if ! [[ $1 =~ $re ]] ; then
+   		echo "[ERROR]: The first argumen should be left blank (For no end time) or be a number!" >&2; exit 1
+	fi
+	echo "[INFO]: Dispalying for $1 seconds..."
+else
+echo "[WARNING]: No ending time set..."
+notime="true"
+fi
+t=0
+echo "[INFO]: Here is the current cpu usage (Press ctrl+c to exit):";
+echo ""
+while [[ t -lt $1 || $notime == "true" ]]; do
 
   CPU=(`cat /proc/stat | grep '^cpu '`) # Get the total CPU statistics.
   unset CPU[0]                          # Discard the "cpu" prefix.
@@ -28,5 +41,6 @@ while true; do
   PREV_IDLE="$IDLE"
 
   # Wait before checking again.
+  t=$(($t + 1))
   sleep 1
 done
