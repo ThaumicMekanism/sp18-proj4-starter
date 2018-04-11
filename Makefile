@@ -49,4 +49,4 @@ cpu:
 	chmod u+x cpu_usage.sh
 	./cpu_usage.sh 10;
 
-.PHONY: build build-student build-naive build-correctness clean clean-student clean-naive clean-correctness batch view correctness valgrind
+.PHONY: build build-student build-naive build-correctness clean clean-student clean-naive clean-correctness batch view correctness valgrind cpu
