@@ -34,7 +34,10 @@ clean-correctness:
 	rm check-correctness;
 
 batch:
-	echo -ne "Cleaning..."\\r; make clean; echo "Cleaning...Done!"; echo -ne "Building..."\\r; make build; make build-correctness; echo -e "Building...Done!\nBatch testing your project..."; ./run-test.py batch; make clean-correctness;
+	echo -ne "Cleaning..."\\r; make clean; echo "Cleaning...Done!"; echo -ne "Building..."\\r; make build; make build-correctness; echo -e "Building...Done!\nBatch testing your project..."; ./run-test.py batch; 
+
+student:
+	echo -ne "Cleaning..."\\r; make clean-student; echo "Cleaning...Done!"; echo -ne "Building..."\\r; make build-student; make build-correctness; echo -e "Building...Done!\nRunning just your project..."; ./run-test.py student; 
 
 view:
 	echo -ne "Cleaning..."\\r; make clean-student; echo "Cleaning...Done!"; echo -ne "Building..."\\r; make build-student; echo  -e "Building...Done!\nViewing..."; ./run-test.py view;
@@ -48,5 +51,6 @@ valgrind:
 cpu:
 	chmod u+x cpu_usage.sh
 	./cpu_usage.sh 10;
+	
 
-.PHONY: build build-student build-naive build-correctness clean clean-student clean-naive clean-correctness batch view correctness valgrind cpu
+.PHONY: build build-student build-naive build-correctness clean clean-student clean-naive clean-correctness batch view correctness valgrind student cpu

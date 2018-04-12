@@ -21,6 +21,9 @@ def main(mode):
 	elif mode == 'correctness':
 		run_student(False)
 		check_correctness()
+	elif mode == 'student':
+		run_student(True)
+		check_correctness()
 	else:
 		print ("Unknown mode specified to run")
 
